@@ -1,0 +1,10 @@
+# Environments
+venv/
+__pycache__/
+*.pyc
+
+# IDE configs
+pyrightconfig.json
+
+# Local app data
+src/drafted_players.txt
