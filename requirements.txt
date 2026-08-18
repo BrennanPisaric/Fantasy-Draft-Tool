@@ -1,8 +1,7 @@
-espn_api
 pandas
 scikit-learn
 xgboost
 nfl_data_py
 streamlit
 numpy
-streamlit-autorefresh
+espn_api

@@ -3,18 +3,18 @@ import numpy as np
 import random
 
 class DraftOptimizer:
-    def __init__(self, league_size=12, roster_spots=16):
+    def __init__(self, league_size=12, roster_spots=14):
         self.league_size = league_size
         self.roster_spots = roster_spots
         
         # Baseline ranks for VOR calculation (2 QB, 2 RB, 2 WR, 1 TE, 1 Flex)
         self.baseline_ranks = {
-            'QB': 24, # 2 starting QBs * 12 teams
-            'RB': 30, # 2 starting RBs + half of the flex spots
-            'WR': 30, # 2 starting WRs + half of the flex spots
-            'TE': 12, # 1 starting TE
-            'K': 12,
-            'D/ST': 12
+            'QB': int(2 * self.league_size),
+            'RB': int(2.5 * self.league_size),
+            'WR': int(2.5 * self.league_size),
+            'TE': int(1 * self.league_size),
+            'K': int(1 * self.league_size),
+            'D/ST': int(1 * self.league_size)
         }
 
     def calculate_vor(self, players_df):
@@ -108,12 +108,12 @@ class DraftOptimizer:
                     if pos:
                         pos_counts[pos] = pos_counts.get(pos, 0) + 1
                 
-            # Soft caps for typical starting rosters (adjust as needed for flex spots)
+            # Soft caps for 14-man roster (2 QB, 2 RB, 2 WR, 1 TE, 1 Flex, 1 K, 1 D/ST, 4 Bench)
             roster_soft_caps = {
-                'QB': 3,
-                'RB': 4,
-                'WR': 4,
-                'TE': 2,
+                'QB': 3, # 2 Starters + 1 Backup
+                'RB': 4, # 2 Starters + Flex depth
+                'WR': 4, # 2 Starters + Flex depth
+                'TE': 2, # 1 Starter + 1 Backup
                 'K': 1,
                 'D/ST': 1
             }
